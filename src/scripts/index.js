@@ -28,7 +28,6 @@ function loadsettings() {
       }
       if (guesslimit) {
         const guessamount = document.getElementById("guessamount").value;
-        console.log(guessamount);
         if (!CheckIfIntInput(guessamount) || guessamount <= 0) {
           alert(
             "Please enter a whole number greater than 0 for the maximum amount of guesses"
@@ -36,9 +35,13 @@ function loadsettings() {
           return;
         }
         startgame(maxnumber, guessamount);
+        return;
       }
       startgame(maxnumber);
     });
 }
-function startgame() {}
+function startgame(maxnumber, guessamount = 0) {
+  console.log(maxnumber);
+  console.log(guessamount);
+}
 loadsettings();
