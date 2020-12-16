@@ -4,7 +4,7 @@ const Domselectors = {
 }; // remember to remove if not used more often
 function loadsettings() {
   let guesslimit;
-  Domselectors.body.innerHTML = `<div id="starting_page"><h1>Guess the Number</h1><div id="intro_form"><p>Out of how much would you like to guess?</p><input class="num_input" id="maxnumber" type="number" min="2"><br><input type="checkbox" id="Limitoption"><label>Limit number of guesses</label><div id=guesslimitbox></div><br><input type="submit" value="Start the game" id="start_button"></div></div>`;
+  Domselectors.body.innerHTML = `<div class="page"><h1>Guess the Number</h1><div id="intro_form"><p>Out of how much would you like to guess?</p><input class="num_input" id="maxnumber" type="number" min="2"><br><input type="checkbox" id="Limitoption"><label>Limit number of guesses</label><div id=guesslimitbox></div><br><input type="submit" value="Start the game" id="start_button"></div></div>`;
   document.getElementById("Limitoption").addEventListener("click", function () {
     if (document.getElementById("Limitoption").checked) {
       guesslimit = true;
@@ -41,7 +41,17 @@ function loadsettings() {
     });
 }
 function startgame(maxnumber, guessamount = 0) {
-  console.log(maxnumber);
-  console.log(guessamount);
+  const numbertoguess = Math.floor(Math.random() * maxnumber) + 1;
+  console.log(numbertoguess);
+  let guess;
+  let guesses = [];
+  let guesslimit = true;
+  if (guessamount === 0) {
+    guesslimit = false;
+  }
+  Domselectors.body.innerHTML = `<div class="page"><h2>I am thinking of a number between 1 and ${maxnumber}</h2><br><br><h3>Your Guess:</h3><input class="num_input" id="guess" type="number"><br><input type="submit" value="Guess" id="submitguess"></div>`;
+  do {
+    guess = numbertoguess;
+  } while (guess !== numbertoguess);
 }
 loadsettings();
