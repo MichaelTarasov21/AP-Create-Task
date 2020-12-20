@@ -1,7 +1,7 @@
 import { CheckIfIntInput } from "./intergercheck";
 const Domselectors = {
   body: document.body,
-}; // remember to remove if not used more often
+}; 
 function loadsettings() {
   let guesslimit;
   Domselectors.body.innerHTML = `<div class="page"><h1>Guess the Number</h1><div id="intro_form"><p>Out of how much would you like to guess?</p><input class="num_input" id="maxnumber" type="number" min="2"><br><input type="checkbox" id="Limitoption"><label>Limit number of guesses</label><div id=guesslimitbox></div><br><input type="submit" value="Start the game" id="start_button"></div></div>`;
@@ -43,15 +43,35 @@ function loadsettings() {
 function startgame(maxnumber, guessamount = 0) {
   const numbertoguess = Math.floor(Math.random() * maxnumber) + 1;
   console.log(numbertoguess);
-  let guess;
   let guesses = [];
-  let guesslimit = true;
-  if (guessamount === 0) {
-    guesslimit = false;
+  let guesslimit = false;
+  if (guessamount !== 0) {
+    guesslimit = true;
   }
-  Domselectors.body.innerHTML = `<div class="page"><h2>I am thinking of a number between 1 and ${maxnumber}</h2><br><br><h3>Your Guess:</h3><input class="num_input" id="guess" type="number"><br><input type="submit" value="Guess" id="submitguess"></div>`;
-  do {
-    guess = numbertoguess;
-  } while (guess !== numbertoguess);
+  Domselectors.body.innerHTML = `<div class="page"><h2>I am thinking of a number between 1 and ${maxnumber}</h2><br><br><h3>Your Guess:</h3><input class="num_input" id="guess" type="number"><br><input type="submit" value="Guess" id="submitguess"><br><div id="tips"></div>`;
+  document.getElementById("submitguess").addEventListener('click', function(){
+    let guess = document.getElementById('guess').value
+    if (CheckIfIntInput(guess)){
+      guesses.push(guess);
+      if (guess == numbertoguess){
+        document.body.innerHTML = `<div class="page"><h1>You Won</h1><br><h2>I was thinking of ${numbertoguess}</h2><br><div id="Guesses"></div></div>`
+        guesses.forEach(function(item, index){
+          if (item < numbertoguess){
+            document.getElementById("Guesses").insertAdjacentHTML('beforeend', `<br>${index + 1}: You guessed ${item} and I told you that it was less than the number you had to guess<br>`)
+          }else if (item > numbertoguess){
+            document.getElementById("Guesses").insertAdjacentHTML('beforeend', `<br>${index + 1}: You guessed ${item} and I told you that it was greater than the number you had to guess<br>`)
+          } else{
+            document.getElementById("Guesses").insertAdjacentHTML('beforeend', `<br>${index + 1}: You guessed ${item} and I told you that you won<br>`)
+        }})
+        return;
+      } else if (guess > numbertoguess){
+        document.getElementById("tips").innerHTML = `<h1>${guess} is greater than the number I am thinking of</h1>`
+      } else{
+        document.getElementById("tips").innerHTML = `<h1>${guess} is less than the number I am thinking of</h1>`
+      }
+    }else{
+      alert("Please guess a whole number")
+    }
+  });
 }
 loadsettings();
