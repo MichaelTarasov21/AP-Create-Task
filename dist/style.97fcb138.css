@@ -1,0 +1,28 @@
+body {
+  background-color: #A6EE31;
+  height: 95vh;
+  font-size: 62.5%;
+  color: #AC6F48;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+  font-size: large;
+  text-align: center;
+}
+
+#guesses {
+  font-size: 130%;
+}
+
+#intro_form {
+  font-size: 130%;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 40%;
+}
+
+/*# sourceMappingURL=/style.97fcb138.css.map */
