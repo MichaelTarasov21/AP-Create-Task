@@ -1,9 +1,19 @@
-function CheckIfIntInput(UserInput) {
+function CheckIfIntInput(UserInput, InvertResults = false) {
   const IntofInput = parseInt(UserInput);
+  let result
+  if (InvertResults){
   if (UserInput != IntofInput) {
-    return false;
+    result = true;
   } else {
-    return true;
+    result = false;
   }
+} else {
+  if (UserInput != IntofInput) {
+    result = false;
+  } else {
+    result = true;
+  }
+}
+  return result
 }
 export {CheckIfIntInput};
